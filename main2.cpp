@@ -23,6 +23,8 @@ void DrawGL(Cube *cube);
 double position_x = 0;
 double position_y = 0;
 double angle_pyramide = 0;
+double angle_cube = 180;
+double x_cube = 2;
 double hauteur = 3;
 
 GLuint texture1;
@@ -92,8 +94,10 @@ int main(int argc, char *argv[])
 
         angle_pyramide +=  VITESSE_ROTATION_PYRAMIDE*elapsed_time;
 
+        angle_cube += VITESSE_ROTATION_CUBE*elapsed_time;
         cube->set_angle(cube->get_angle() + (VITESSE_ROTATION_CUBE * elapsed_time));
 
+        x_cube = 2*cos((angle_cube*M_PI)/180);
         cube->set_position_x(2*cos((cube->get_angle()*M_PI)/180));
 
         DrawGL(cube);
@@ -109,8 +113,46 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+void dessinerCaisse()
+{
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    glPushMatrix();
+    glTranslated(x_cube,2,0);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    //Je feinte en dessinant la m�me face 4 fois avec une rotation
+    for (int i = 0; i < 4; i++)
+    {
+        glBegin(GL_QUADS);
+        glTexCoord2d(0,1);
+        glVertex3d(1,1,1);
+        glTexCoord2d(0,0);
+        glVertex3d(1,1,-1);
+        glTexCoord2d(1,0);
+        glVertex3d(-1,1,-1);
+        glTexCoord2d(1,1);
+        glVertex3d(-1,1,1);
+        glEnd();
+        glRotated(90,0,0,1);
+    }
+    //puis le dessus (pas besoin du dessous gr�ce au sol)
+    glBegin(GL_QUADS);
+    glTexCoord2d(0,0);
+    glVertex3d(1,-1,1);
+    glTexCoord2d(1,0);
+    glVertex3d(1,1,1);
+    glTexCoord2d(1,1);
+    glVertex3d(-1,1,1);
+    glTexCoord2d(0,1);
+    glVertex3d(-1,-1,1);
+
+    glEnd();
+    glPopMatrix();
+
+}
+
 void dessinerPyramide()
 {
+
     glBindTexture(GL_TEXTURE_2D, texture2);
     glPushMatrix();
     glTranslated(-1,-1,0);
@@ -156,6 +198,7 @@ void DrawGL(Cube *cube)
 
     glColor3ub(255,255,255);
 
+    dessinerCaisse();
     cube->draw(texture1);
     dessinerPyramide();
 

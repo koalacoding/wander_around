@@ -4,9 +4,11 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp\
-           sdl_gl_utils/sdl_gl_utils.cpp
+           sdl_gl_utils/sdl_gl_utils.cpp\
+           objects/cube/cube.cpp
 
-HEADERS += sdl_gl_utils/sdl_gl_utils.h
+HEADERS += sdl_gl_utils/sdl_gl_utils.h\
+           objects/cube/cube.h
 
 LIBS += -L/usr/local/lib -lSDL -lSDL_image -ldl -lpthread -lGL -lGLU
 
