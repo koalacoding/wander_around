@@ -10,14 +10,15 @@
 
 #include "sdl_gl_utils/sdl_gl_utils.h"
 
-#include "objects/cube/cube.h"
-#include "objects/pyramid/pyramid.h"
+#include "elements/landscape/ground.h"
+#include "elements/objects/cube/cube.h"
+#include "elements/objects/pyramid/pyramid.h"
 
 #define FPS 50
 #define LARGEUR_FENETRE 640
 #define HAUTEUR_FENETRE 480
 
-void DrawGL(Cube *cube, Pyramid *pyramid);
+void DrawGL(Cube *cube, Pyramid *pyramid, Ground *ground);
 
 #define VITESSE_ROTATION_CAMERA 0.01
 #define VITESSE_ROTATION_PYRAMIDE 0.1
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
     Uint32 last_time,current_time,elapsed_time; //for time animation
     Uint32 start_time,stop_time; //for frame limit
 
+    Ground *ground = new Ground();
     Cube *cube = new Cube();
     Pyramid *pyramid = new Pyramid();
 
@@ -89,15 +91,12 @@ int main(int argc, char *argv[])
         elapsed_time = current_time - last_time;
         last_time = current_time;
 
-        //angle_camera += VITESSE_ROTATION_CAMERA*elapsed_time;
-        //hauteur = 2+2*cos(2*angle_camera*M_PI/180);
-
         pyramid->set_angle(pyramid->get_angle() + (VITESSE_ROTATION_PYRAMIDE * elapsed_time));
 
         cube->set_angle(cube->get_angle() + (VITESSE_ROTATION_CUBE * elapsed_time));
         cube->set_position_x(2*cos((cube->get_angle()*M_PI)/180));
 
-        DrawGL(cube, pyramid);
+        DrawGL(cube, pyramid, ground);
 
         stop_time = SDL_GetTicks();
         if ((stop_time - last_time) < time_per_frame)
@@ -110,7 +109,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void DrawGL(Cube *cube, Pyramid *pyramid)
+void DrawGL(Cube *cube, Pyramid *pyramid, Ground *ground)
 {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -120,21 +119,7 @@ void DrawGL(Cube *cube, Pyramid *pyramid)
     gluLookAt(position_x,position_y,1,position_x,position_y + 6,0,0,0,1);
     glRotated(0,1,1,1);
 
-    //LE SOL
-    glBindTexture(GL_TEXTURE_2D, texture4);
-    glBegin(GL_QUADS);
-    glTexCoord2i(0,0);
-    glVertex3i(-10,-10,-1);
-    glTexCoord2i(10,0);
-    glVertex3i(10,-10,-1);
-    glTexCoord2i(10,10);
-    glVertex3i(10,10,-1);
-    glTexCoord2i(0,10);
-    glVertex3i(-10,10,-1);
-    glEnd();
-
-    glColor3ub(255,255,255);
-
+    ground->draw(texture4);
     cube->draw(texture1);
     pyramid->draw(texture2);
 
