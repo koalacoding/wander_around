@@ -19,7 +19,8 @@ void DrawGL();
 #define VITESSE_ROTATION_CAMERA 0.01
 #define VITESSE_ROTATION_PYRAMIDE 0.1
 #define VITESSE_ROTATION_CUBE 0.05
-double angle_camera = 0;
+double position_x = 0;
+double position_y = 0;
 double angle_pyramide = 0;
 double angle_cube = 180;
 double x_cube = 2;
@@ -32,13 +33,6 @@ GLuint texture1;
 GLuint texture2;
 GLuint texture3;
 GLuint texture4;
-
-
-bool fexists(const char *filename)
-{
-  std::ifstream ifile(filename);
-  return ifile;
-}
 
 int main(int argc, char *argv[])
 {
@@ -62,16 +56,6 @@ int main(int argc, char *argv[])
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-
-    if (fexists("../main.cpp"))
-    {
-        // File does not exist
-        std::cout << "ok";
-    }
-
-    else std::cout << "bad";
-
-
     texture1 = loadTexture("../images/stainedglass05.jpg");
     texture2 = loadTexture("../images/tiles_ctf05r.jpg");
     texture3 = loadTexture("../images/caisse.jpg");
@@ -94,19 +78,38 @@ int main(int argc, char *argv[])
                 case SDL_KEYDOWN:
                 switch (event.key.keysym.sym)
                 {
-                    case SDLK_p:
-                    takeScreenshot("test.bmp");
+                    /*case SDLK_LEFT:
+                    position_x--;
                     break;
+
+                    case SDLK_RIGHT:
+                    position_x++;
+                    break;
+
+                    case SDLK_UP:
+                    position_y++;
+                    break;
+
+                    case SDLK_DOWN:
+                    position_y--;
+                    break;*/
                 }
             }
         }
+
+        Uint8* keystate = SDL_GetKeyState(NULL);
+
+        if(keystate[SDLK_UP]) position_y += 0.2;
+        if(keystate[SDLK_DOWN]) position_y-=0.2;
+        if(keystate[SDLK_RIGHT]) position_x += 0.2;
+        if(keystate[SDLK_LEFT]) position_x -= 0.2;
 
         current_time = SDL_GetTicks();
         elapsed_time = current_time - last_time;
         last_time = current_time;
 
-        angle_camera += VITESSE_ROTATION_CAMERA*elapsed_time;
-        hauteur = 2+2*cos(2*angle_camera*M_PI/180);
+        //angle_camera += VITESSE_ROTATION_CAMERA*elapsed_time;
+        //hauteur = 2+2*cos(2*angle_camera*M_PI/180);
 
         angle_pyramide +=  VITESSE_ROTATION_PYRAMIDE*elapsed_time;
 
@@ -193,9 +196,8 @@ void DrawGL()
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity( );
 
-    gluLookAt(3,4,hauteur,0,0,0,0,0,1);
-
-    glRotated(angle_camera,0,0,1);
+    gluLookAt(position_x,position_y,1,position_x,position_y + 6,0,0,0,1);
+    glRotated(0,1,1,1);
 
     //LE SOL
     glBindTexture(GL_TEXTURE_2D, texture4);
