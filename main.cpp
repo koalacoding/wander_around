@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <fstream>
 
-#include "sdlglutils.h"
+#include "sdl_gl_utils/sdl_gl_utils.h"
 
 #define FPS 50
 #define LARGEUR_FENETRE 320
@@ -72,10 +72,10 @@ int main(int argc, char *argv[])
     else std::cout << "bad";
 
 
-    texture1 = loadTexture("../stainedglass05.jpg");
-    texture2 = loadTexture("../tiles_ctf05r.jpg");
-    texture3 = loadTexture("../caisse.jpg");
-    texture4 = loadTexture("../grass.jpg");
+    texture1 = loadTexture("../images/stainedglass05.jpg");
+    texture2 = loadTexture("../images/tiles_ctf05r.jpg");
+    texture3 = loadTexture("../images/caisse.jpg");
+    texture4 = loadTexture("../images/grass.jpg");
 
     last_time = SDL_GetTicks();
     for (;;)
