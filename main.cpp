@@ -9,20 +9,21 @@
 #include <fstream>
 
 #include "sdl_gl_utils/sdl_gl_utils.h"
+
 #include "objects/cube/cube.h"
+#include "objects/pyramid/pyramid.h"
 
 #define FPS 50
 #define LARGEUR_FENETRE 640
 #define HAUTEUR_FENETRE 480
 
-void DrawGL(Cube *cube);
+void DrawGL(Cube *cube, Pyramid *pyramid);
 
 #define VITESSE_ROTATION_CAMERA 0.01
 #define VITESSE_ROTATION_PYRAMIDE 0.1
 #define VITESSE_ROTATION_CUBE 0.05
 double position_x = 0;
 double position_y = 0;
-double angle_pyramide = 0;
 double hauteur = 3;
 
 GLuint texture1;
@@ -40,6 +41,7 @@ int main(int argc, char *argv[])
     Uint32 start_time,stop_time; //for frame limit
 
     Cube *cube = new Cube();
+    Pyramid *pyramid = new Pyramid();
 
     SDL_Init(SDL_INIT_VIDEO);
     atexit(SDL_Quit);
@@ -90,13 +92,12 @@ int main(int argc, char *argv[])
         //angle_camera += VITESSE_ROTATION_CAMERA*elapsed_time;
         //hauteur = 2+2*cos(2*angle_camera*M_PI/180);
 
-        angle_pyramide +=  VITESSE_ROTATION_PYRAMIDE*elapsed_time;
+        pyramid->set_angle(pyramid->get_angle() + (VITESSE_ROTATION_PYRAMIDE * elapsed_time));
 
         cube->set_angle(cube->get_angle() + (VITESSE_ROTATION_CUBE * elapsed_time));
-
         cube->set_position_x(2*cos((cube->get_angle()*M_PI)/180));
 
-        DrawGL(cube);
+        DrawGL(cube, pyramid);
 
         stop_time = SDL_GetTicks();
         if ((stop_time - last_time) < time_per_frame)
@@ -109,29 +110,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void dessinerPyramide()
-{
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glPushMatrix();
-    glTranslated(-1,-1,0);
-    glRotated(angle_pyramide,0,0,1);
-    //Je feinte en dessinant la m�me face 4 fois avec une rotation
-    for (int i = 0; i < 4; i++)
-    {
-        glBegin(GL_TRIANGLES);
-        glTexCoord2d(0,0);
-        glVertex3d(1,1,-1);
-        glTexCoord2d(1,0);
-        glVertex3d(-1,1,-1);
-        glTexCoord2d(0.5,1);
-        glVertex3d(0,0,1);
-        glEnd();
-        glRotated(90,0,0,1);
-    }
-    glPopMatrix();
-}
-
-void DrawGL(Cube *cube)
+void DrawGL(Cube *cube, Pyramid *pyramid)
 {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -157,7 +136,7 @@ void DrawGL(Cube *cube)
     glColor3ub(255,255,255);
 
     cube->draw(texture1);
-    dessinerPyramide();
+    pyramid->draw(texture2);
 
     glFlush();
     SDL_GL_SwapBuffers();
