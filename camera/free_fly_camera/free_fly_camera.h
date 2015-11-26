@@ -11,23 +11,21 @@ class FreeFlyCamera
 public:
     FreeFlyCamera(const Vector3D & position = Vector3D(0,0,0));
 
-    virtual void OnMouseMotion(const SDL_MouseMotionEvent & event);
-    virtual void OnMouseButton(const SDL_MouseButtonEvent & event);
-    virtual void OnKeyboard(const SDL_KeyboardEvent & event);
+    void OnMouseMotion(const SDL_MouseMotionEvent & event);
+    void OnKeyboard(const SDL_KeyboardEvent & event);
 
-    virtual void GoForward(Uint32 timestep);
-    virtual void GoBackward(Uint32 timestep);
-    virtual void GoRight(Uint32 timestep);
-    virtual void GoLeft(Uint32 timestep);
-    virtual void animate(Uint32 timestep, const SDL_KeyboardEvent & event);
-    virtual void setSpeed(double speed);
-    virtual void setSensivity(double sensivity);
+    void GoForward(Uint32 timestep);
+    void GoBackward(Uint32 timestep);
+    void GoRight(Uint32 timestep);
+    void GoLeft(Uint32 timestep);
+    void animate(Uint32 timestep);
+    void setSensivity(double sensivity);
 
-    virtual void setPosition(const Vector3D & position);
+    void setPosition(const Vector3D & position);
 
-    virtual void look();
+    void look();
 
-    virtual ~FreeFlyCamera();
+    ~FreeFlyCamera();
 protected:
     double _speed;
     double _sensivity;
@@ -50,7 +48,6 @@ protected:
     double _phi;
 
     void VectorsFromAngles();
-    //void Init();
 };
 
 #endif //FREEFLYCAMERA_H

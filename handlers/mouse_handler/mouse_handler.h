@@ -1,7 +1,6 @@
 #ifndef MOUSEHANDLER_H
 #define MOUSEHANDLER_H
 
-#include "../camera/camera.h"
 #include "../camera/free_fly_camera/free_fly_camera.h"
 
 class MouseHandler

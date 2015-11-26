@@ -3,6 +3,8 @@
 #include <SDL/SDL_image.h>
 #include <GL/glu.h>
 
+#include <typeinfo>
+#include <iostream>
 #include <cstring>
 #include <cstdlib>
 

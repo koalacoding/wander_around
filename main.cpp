@@ -1,16 +1,5 @@
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <cstdlib>
-#include <cmath>
-#include <iostream>
-#include <unistd.h>
-#include <fstream>
-
 #include "sdl_gl_utils/sdl_gl_utils.h"
 
-#include "camera/camera.h"
 #include "camera/free_fly_camera/free_fly_camera.h"
 #include "elements/landscape/ground.h"
 #include "elements/objects/cube/cube.h"
@@ -18,93 +7,82 @@
 #include "handlers/keyboard_handler/keyboard_handler.h"
 #include "handlers/mouse_handler/mouse_handler.h"
 
-#define FPS 50
-#define LARGEUR_FENETRE 640
-#define HAUTEUR_FENETRE 480
 
-void DrawGL(FreeFlyCamera* free_fly_camera, Cube *cube, Pyramid *pyramid, Ground *ground, int camera_angle_x);
+#define FPS 60
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
+#define CAMERA_ROTATION_SPEED 0.01
+#define PYRAMID_ROTATION_SPEED 0.1
+#define CUBE_ROTATION_SPEED 0.05
 
-#define VITESSE_ROTATION_CAMERA 0.01
-#define VITESSE_ROTATION_PYRAMIDE 0.1
-#define VITESSE_ROTATION_CUBE 0.05
-double hauteur = 3;
+void LoadTextures(GLuint* texture1, GLuint* texture2, GLuint* texture3);
 
-GLuint texture1;
-GLuint texture2;
-GLuint texture3;
-GLuint texture4;
+void DrawGL(FreeFlyCamera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
+            Cube *cube, Pyramid *pyramid, Ground *ground);
 
-void stop()
-{
-    //delete free_fly_camera;
-    SDL_Quit();
-}
+/*void FreeMemory(Ground* ground, FreeFlyCamera* free_fly_camera, Cube* cube, Pyramid* pyramid,
+                GLuint* texture1, GLuint* texture2, GLuint* texture3);*/
 
 int main(int argc, char *argv[])
 {
-    SDL_Surface* ecran = NULL;
-    const Uint32 time_per_frame = 1000/FPS;
+    SDL_Surface* window = NULL;
+
+    GLuint texture1;
+    GLuint texture2;
+    GLuint texture4;
+
+    const Uint32 time_per_frame = 1000 / FPS;
 
     Uint8* keystate = SDL_GetKeyState(NULL);
 
     Uint32 last_time, current_time, elapsed_time; // For time animation
-    Uint32 start_time, stop_time; // For frame limit
+    Uint32 stop_time; // For frame limit
 
-    Camera *camera = new Camera();
     FreeFlyCamera* free_fly_camera = new FreeFlyCamera(Vector3D(0,0,2));
 
     Ground *ground = new Ground(100, 100);
     Cube *cube = new Cube();
     Pyramid *pyramid = new Pyramid();
 
-    KeyboardHandler *keyboard_handler = new KeyboardHandler();
-    MouseHandler *mouse_handler = new MouseHandler();
-
-    int camera_angle_x(0);
 
     SDL_Init(SDL_INIT_VIDEO);
-
-    SDL_WM_SetCaption("SDL GL Application", NULL);
-    ecran = SDL_SetVideoMode(LARGEUR_FENETRE, HAUTEUR_FENETRE, 32, SDL_OPENGL);
+    SDL_WM_SetCaption("Wander Around", NULL);
+    window = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32, SDL_OPENGL);
 
     glMatrixMode( GL_PROJECTION );
-    glLoadIdentity( );
-    gluPerspective(70, (double)LARGEUR_FENETRE/HAUTEUR_FENETRE, 0.001, 1000);
-
+    glLoadIdentity();
+    gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.001, 1000);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
+    //LoadTextures(&texture1, texture2, texture4);
     texture1 = loadTexture("../images/stainedglass05.jpg");
     texture2 = loadTexture("../images/tiles_ctf05r.jpg");
-    texture3 = loadTexture("../images/caisse.jpg");
     texture4 = loadTexture("../images/grass.jpg");
-
-
 
     last_time = SDL_GetTicks();
 
     while(true) {
-        start_time = SDL_GetTicks();
-
         SDL_Event event;
 
-        while(SDL_PollEvent(&event))
-        {
-            switch(event.type)
-            {
+        while(SDL_PollEvent(&event)) {
+            switch(event.type) {
                 case SDL_QUIT:
+                    delete ground;
                     delete free_fly_camera;
-                    exit(0);
-                    break;
-
-                /*case SDL_KEYUP:
-                free_fly_camera->OnKeyboard(event.key);
-                break;*/
+                    delete cube;
+                    delete pyramid;
+                    glDeleteTextures(1, &texture1);
+                    glDeleteTextures(1, &texture2);
+                    glDeleteTextures(1, &texture4);
+                    /*FreeMemory(ground, free_fly_camera, cube,
+                               pyramid, texture1, texture2,
+                               texture4);*/
+                    return 0;
 
                 case SDL_MOUSEMOTION:
                     free_fly_camera->OnMouseMotion(event.motion);
                     break;
-
              }
         }
 
@@ -124,25 +102,20 @@ int main(int argc, char *argv[])
             free_fly_camera->GoLeft(elapsed_time);
         }
 
-        //mouse_handler->Handle(free_fly_camera);
-        //keyboard_handler->Handle(camera);
-
         current_time = SDL_GetTicks();
         elapsed_time = current_time - last_time;
         last_time = current_time;
 
-        free_fly_camera->animate(elapsed_time, event.key);
+        free_fly_camera->animate(elapsed_time);
 
-        pyramid->set_angle(pyramid->get_angle() + (VITESSE_ROTATION_PYRAMIDE * elapsed_time));
-
-        cube->set_angle(cube->get_angle() + (VITESSE_ROTATION_CUBE * elapsed_time));
+        pyramid->set_angle(pyramid->get_angle() + (PYRAMID_ROTATION_SPEED * elapsed_time));
+        cube->set_angle(cube->get_angle() + (CUBE_ROTATION_SPEED * elapsed_time));
         cube->set_position_x(2*cos((cube->get_angle()*M_PI)/180));
 
-        DrawGL(free_fly_camera, cube, pyramid, ground, camera_angle_x);
+        DrawGL(free_fly_camera, texture1, texture2, texture4, cube, pyramid, ground);
 
         stop_time = SDL_GetTicks();
-        if ((stop_time - last_time) < time_per_frame)
-        {
+        if ((stop_time - last_time) < time_per_frame) {
            SDL_Delay(time_per_frame - (stop_time - last_time));
         }
     }
@@ -150,10 +123,15 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void DrawGL(FreeFlyCamera* free_fly_camera, Cube *cube, Pyramid *pyramid, Ground *ground, int camera_angle_x)
-{
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+/*void LoadTextures(GLuint* texture1, GLuint* texture2, GLuint* texture3) {
+    *texture1 = loadTexture("../images/stainedglass05.jpg");
+    *texture2 = loadTexture("../images/tiles_ctf05r.jpg");
+    *texture3 = loadTexture("../images/grass.jpg");
+}*/
 
+void DrawGL(FreeFlyCamera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
+            Cube* cube, Pyramid* pyramid, Ground* ground) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -166,3 +144,14 @@ void DrawGL(FreeFlyCamera* free_fly_camera, Cube *cube, Pyramid *pyramid, Ground
     glFlush();
     SDL_GL_SwapBuffers();
 }
+
+/*void FreeMemory(Ground* ground, FreeFlyCamera* free_fly_camera, Cube* cube, Pyramid* pyramid,
+                GLuint texture1, GLuint texture2, GLuint texture3) {
+    delete ground;
+    delete free_fly_camera;
+    delete cube;
+    delete pyramid;
+    delete texture1;
+    delete texture2;
+    delete texture3;
+}*/

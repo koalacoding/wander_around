@@ -52,7 +52,6 @@ void Cube::set_position_x(double position_x) {
 
 void Cube::draw(GLuint texture)
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
     glPushMatrix();
     glTranslated(this->position_x_, 2, 0);
     glBindTexture(GL_TEXTURE_2D, texture);
