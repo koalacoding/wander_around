@@ -11,7 +11,6 @@
 #define FPS 60
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
-#define CAMERA_ROTATION_SPEED 0.01
 #define PYRAMID_ROTATION_SPEED 0.1
 #define CUBE_ROTATION_SPEED 0.05
 
@@ -38,18 +37,20 @@ int main(int argc, char *argv[])
     Uint32 last_time, current_time, elapsed_time; // For time animation
     Uint32 stop_time; // For frame limit
 
-    FreeFlyCamera* free_fly_camera = new FreeFlyCamera(Vector3D(0,0,2));
+    FreeFlyCamera* free_fly_camera = new FreeFlyCamera(Vector3D(0,0,1));
 
     Ground *ground = new Ground(100, 100);
     Cube *cube = new Cube();
     Pyramid *pyramid = new Pyramid();
 
-
+    putenv("SDL_VIDEO_CENTERED=1");
     SDL_Init(SDL_INIT_VIDEO);
     SDL_WM_SetCaption("Wander Around", NULL);
     window = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32, SDL_OPENGL);
 
-    glMatrixMode( GL_PROJECTION );
+    SDL_WM_GrabInput(SDL_GRAB_ON);
+
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.001, 1000);
     glEnable(GL_DEPTH_TEST);
@@ -84,6 +85,10 @@ int main(int argc, char *argv[])
                     free_fly_camera->OnMouseMotion(event.motion);
                     break;
              }
+        }
+
+        if (keystate[SDLK_ESCAPE]) {
+            return(0);
         }
 
         if (keystate[SDLK_UP]) {

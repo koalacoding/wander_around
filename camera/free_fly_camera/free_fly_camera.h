@@ -12,7 +12,6 @@ public:
     FreeFlyCamera(const Vector3D & position = Vector3D(0,0,0));
 
     void OnMouseMotion(const SDL_MouseMotionEvent & event);
-    void OnKeyboard(const SDL_KeyboardEvent & event);
 
     void GoForward(Uint32 timestep);
     void GoBackward(Uint32 timestep);
@@ -20,8 +19,6 @@ public:
     void GoLeft(Uint32 timestep);
     void animate(Uint32 timestep);
     void setSensivity(double sensivity);
-
-    void setPosition(const Vector3D & position);
 
     void look();
 

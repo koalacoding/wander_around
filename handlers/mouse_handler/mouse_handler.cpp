@@ -20,10 +20,6 @@ void MouseHandler::Handle(FreeFlyCamera *camera) {
                 exit(0);
                 break;
 
-            case SDL_KEYUP:
-                camera->OnKeyboard(event.key);
-                break;
-
             case SDL_MOUSEMOTION:
                 camera->OnMouseMotion(event.motion);
                 break;

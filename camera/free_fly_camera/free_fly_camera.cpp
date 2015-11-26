@@ -36,56 +36,46 @@ void FreeFlyCamera::OnMouseMotion(const SDL_MouseMotionEvent & event)
     VectorsFromAngles();
 }
 
-void FreeFlyCamera::OnKeyboard(const SDL_KeyboardEvent & event)
-{
-    for (KeyStates::iterator it = _keystates.begin(); it != _keystates.end(); it++)
-    {
-        if (event.keysym.sym == it->first)
-        {
-            it->second = (event.type == SDL_KEYDOWN);
-            break;
-        }
-    }
-}
-
 void FreeFlyCamera::GoForward(Uint32 timestep) {
-    _position += _forward * (_speed * timestep);
+    static const Vector3D up(0, 0, 1);
+    Vector3D temp;
+    temp = up.crossProduct(_left);
+
+    _position -= temp * (_speed * timestep);
 }
 
 void FreeFlyCamera::GoBackward(Uint32 timestep) {
-    _position -= _forward * (_speed * timestep);
+    static const Vector3D up(0, 0, 1);
+    Vector3D temp;
+    temp = up.crossProduct(_left);
+
+    _position += temp * (_speed * timestep);
 }
 
 void FreeFlyCamera::GoRight(Uint32 timestep) {
-    _position -= _left * (_speed * timestep);
+    static const Vector3D up(0, 0, 1);
+    Vector3D temp;
+    temp = up.crossProduct(_forward);
+
+    _position -= temp * (_speed * timestep);
 }
 
 void FreeFlyCamera::GoLeft (Uint32 timestep) {
-    _position += _left * (_speed * timestep);
+    static const Vector3D up(0, 0, 1);
+    Vector3D temp;
+    temp = up.crossProduct(_forward);
+
+    _position += temp * (_speed * timestep);
 }
 
 void FreeFlyCamera::animate(Uint32 timestep)
 {
-    if (_verticalMotionActive)
-    {
-        if (timestep > _timeBeforeStoppingVerticalMotion)
-            _verticalMotionActive = false;
-        else
-            _timeBeforeStoppingVerticalMotion -= timestep;
-        _position += Vector3D(0,0,_verticalMotionDirection * _speed * timestep);
-    }
     _target = _position + _forward;
 }
 
 void FreeFlyCamera::setSensivity(double sensivity)
 {
     _sensivity = sensivity;
-}
-
-void FreeFlyCamera::setPosition(const Vector3D & position)
-{
-    _position = position;
-    _target = _position + _forward;
 }
 
 void FreeFlyCamera::VectorsFromAngles()
