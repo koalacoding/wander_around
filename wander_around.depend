@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1448709146 source:f:\coding\cpp\wander_around_cb\main.cpp
+1448710100 source:f:\coding\cpp\wander_around_cb\main.cpp
 	<iostream>
 	"sdl_gl_utils/sdl_gl_utils.h"
 	"camera/camera/camera.h"
-	"elements/landscape/ground.h"
+	"elements/landscape/ground/ground.h"
 	"elements/objects/cube/cube.h"
 	"elements/objects/pyramid/pyramid.h"
 	"handlers/keyboard_handler/keyboard_handler.h"
@@ -334,4 +334,10 @@
 	<GL/glu.h>
 	<SDL/SDL.h>
 	"../vector3d/vector3d.h"
+
+1448709186 source:f:\coding\cpp\wander_around_cb\elements\landscape\ground\ground.cpp
+	"ground.h"
+
+1448710366 f:\coding\cpp\wander_around_cb\elements\landscape\ground\ground.h
+	<GL/glu.h>
 

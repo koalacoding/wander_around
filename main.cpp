@@ -2,7 +2,7 @@
 
 #include "sdl_gl_utils/sdl_gl_utils.h"
 #include "camera/camera/camera.h"
-#include "elements/landscape/ground.h"
+#include "elements/landscape/ground/ground.h"
 #include "elements/objects/cube/cube.h"
 #include "elements/objects/pyramid/pyramid.h"
 #include "handlers/keyboard_handler/keyboard_handler.h"

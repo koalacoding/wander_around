@@ -16,4 +16,5 @@ using Ubuntu with Unity.
 - GLU (glu32 on Windows 7)
 
 ## To do
+* Allow the use of ZQSD to move around
 * Fix memory leaks

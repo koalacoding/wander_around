@@ -5,21 +5,12 @@
 
 class Ground
 {
-public:
-    /*-----------------------------
-    ----------CONSTRUCTOR----------
-    -----------------------------*/
-
+  public:
     Ground();
     Ground(double size_x, double size_y);
-
-    /*----------------------
-    ----------DRAW----------
-    ----------------------*/
-
     void draw(GLuint texture);
 
-private:
+  private:
     double size_x_;
     double size_y_;
 };
