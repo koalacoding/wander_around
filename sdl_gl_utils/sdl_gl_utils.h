@@ -1,8 +1,16 @@
 #ifndef SDLGLUTILS_H
 #define SDLGLUTILS_H
 
-#include <GL/gl.h>
+
+#include <typeinfo>
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 
 #ifndef GL_CLAMP_TO_EDGE
 #define GL_CLAMP_TO_EDGE 0x812F

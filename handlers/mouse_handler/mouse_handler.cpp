@@ -1,7 +1,3 @@
-#include <iostream>
-
-#include <SDL/SDL.h>
-
 #include "mouse_handler.h"
 
 MouseHandler::MouseHandler()
@@ -9,7 +5,7 @@ MouseHandler::MouseHandler()
 
 }
 
-void MouseHandler::Handle(FreeFlyCamera *camera) {
+void MouseHandler::Handle(Camera *camera) {
     SDL_Event event;
 
     while(SDL_PollEvent(&event))

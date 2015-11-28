@@ -1,12 +1,4 @@
 #include "sdl_gl_utils.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <GL/glu.h>
-
-#include <typeinfo>
-#include <iostream>
-#include <cstring>
-#include <cstdlib>
 
 SDL_Surface * flipSurface(SDL_Surface * surface);
 

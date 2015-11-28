@@ -1,15 +1,19 @@
-#ifndef FREEFLYCAMERA_H
-#define FREEFLYCAMERA_H
+#ifndef CAMERA_H
+#define CAMERA_H
 
-#include "../vector3d/vector3d.h"
-#include <SDL/SDL.h>
+#include <cmath>
 #include <map>
 #include <string>
+#include <GL/glu.h>
+#include <SDL/SDL.h>
 
-class FreeFlyCamera
+#include "../vector3d/vector3d.h"
+
+
+class Camera
 {
 public:
-    FreeFlyCamera(const Vector3D & position = Vector3D(0,0,0));
+    Camera(const Vector3D & position = Vector3D(0,0,0));
 
     void OnMouseMotion(const SDL_MouseMotionEvent & event);
 
@@ -22,7 +26,7 @@ public:
 
     void look();
 
-    ~FreeFlyCamera();
+    ~Camera();
 protected:
     double _speed;
     double _sensivity;
@@ -47,4 +51,4 @@ protected:
     void VectorsFromAngles();
 };
 
-#endif //FREEFLYCAMERA_H
+#endif //CAMERA_H

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "sdl_gl_utils/sdl_gl_utils.h"
-#include "camera/free_fly_camera/free_fly_camera.h"
+#include "camera/camera/camera.h"
 #include "elements/landscape/ground.h"
 #include "elements/objects/cube/cube.h"
 #include "elements/objects/pyramid/pyramid.h"
@@ -17,11 +17,8 @@
 
 void LoadTextures(GLuint* texture1, GLuint* texture2, GLuint* texture3);
 
-void DrawGL(FreeFlyCamera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
+void DrawGL(Camera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
             Cube *cube, Pyramid *pyramid, Ground *ground);
-
-/*void FreeMemory(Ground* ground, FreeFlyCamera* free_fly_camera, Cube* cube, Pyramid* pyramid,
-                GLuint* texture1, GLuint* texture2, GLuint* texture3);*/
 
 int main(int argc, char *argv[])
 {
@@ -38,7 +35,7 @@ int main(int argc, char *argv[])
     Uint32 last_time, current_time, elapsed_time; // For time animation
     Uint32 stop_time; // For frame limit
 
-    FreeFlyCamera* free_fly_camera = new FreeFlyCamera(Vector3D(0,0,1));
+    Camera* free_fly_camera = new Camera(Vector3D(0,0,1));
 
     Ground *ground = new Ground(100, 100);
     Cube *cube = new Cube();
@@ -79,9 +76,6 @@ int main(int argc, char *argv[])
                     glDeleteTextures(1, &texture1);
                     glDeleteTextures(1, &texture2);
                     glDeleteTextures(1, &texture4);
-                    /*FreeMemory(ground, free_fly_camera, cube,
-                               pyramid, texture1, texture2,
-                               texture4);*/
                     return 0;
 
                 case SDL_MOUSEMOTION:
@@ -137,7 +131,7 @@ int main(int argc, char *argv[])
     *texture3 = loadTexture("../images/grass.jpg");
 }*/
 
-void DrawGL(FreeFlyCamera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
+void DrawGL(Camera* free_fly_camera, GLuint texture1, GLuint texture2, GLuint texture4,
             Cube* cube, Pyramid* pyramid, Ground* ground) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -152,14 +146,3 @@ void DrawGL(FreeFlyCamera* free_fly_camera, GLuint texture1, GLuint texture2, GL
     glFlush();
     SDL_GL_SwapBuffers();
 }
-
-/*void FreeMemory(Ground* ground, FreeFlyCamera* free_fly_camera, Cube* cube, Pyramid* pyramid,
-                GLuint texture1, GLuint texture2, GLuint texture3) {
-    delete ground;
-    delete free_fly_camera;
-    delete cube;
-    delete pyramid;
-    delete texture1;
-    delete texture2;
-    delete texture3;
-}*/

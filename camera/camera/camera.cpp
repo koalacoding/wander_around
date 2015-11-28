@@ -1,10 +1,6 @@
-#include "free_fly_camera.h"
+#include "camera.h"
 
-#include <iostream>
-#include <cmath>
-#include <GL/glu.h>
-
-FreeFlyCamera::FreeFlyCamera(const Vector3D & position)
+Camera::Camera(const Vector3D & position)
 {
     _position = position;
     _phi = 0;
@@ -29,14 +25,14 @@ FreeFlyCamera::FreeFlyCamera(const Vector3D & position)
     SDL_ShowCursor(SDL_DISABLE);
 }
 
-void FreeFlyCamera::OnMouseMotion(const SDL_MouseMotionEvent & event)
+void Camera::OnMouseMotion(const SDL_MouseMotionEvent & event)
 {
     _theta -= event.xrel*_sensivity;
     _phi -= event.yrel*_sensivity;
     VectorsFromAngles();
 }
 
-void FreeFlyCamera::GoForward(Uint32 timestep) {
+void Camera::GoForward(Uint32 timestep) {
     static const Vector3D up(0, 0, 1);
     Vector3D temp;
     temp = up.crossProduct(_left);
@@ -44,7 +40,7 @@ void FreeFlyCamera::GoForward(Uint32 timestep) {
     _position -= temp * (_speed * timestep);
 }
 
-void FreeFlyCamera::GoBackward(Uint32 timestep) {
+void Camera::GoBackward(Uint32 timestep) {
     static const Vector3D up(0, 0, 1);
     Vector3D temp;
     temp = up.crossProduct(_left);
@@ -52,7 +48,7 @@ void FreeFlyCamera::GoBackward(Uint32 timestep) {
     _position += temp * (_speed * timestep);
 }
 
-void FreeFlyCamera::GoRight(Uint32 timestep) {
+void Camera::GoRight(Uint32 timestep) {
     static const Vector3D up(0, 0, 1);
     Vector3D temp;
     temp = up.crossProduct(_forward);
@@ -60,7 +56,7 @@ void FreeFlyCamera::GoRight(Uint32 timestep) {
     _position -= temp * (_speed * timestep);
 }
 
-void FreeFlyCamera::GoLeft (Uint32 timestep) {
+void Camera::GoLeft (Uint32 timestep) {
     static const Vector3D up(0, 0, 1);
     Vector3D temp;
     temp = up.crossProduct(_forward);
@@ -68,17 +64,17 @@ void FreeFlyCamera::GoLeft (Uint32 timestep) {
     _position += temp * (_speed * timestep);
 }
 
-void FreeFlyCamera::animate(Uint32 timestep)
+void Camera::animate(Uint32 timestep)
 {
     _target = _position + _forward;
 }
 
-void FreeFlyCamera::setSensivity(double sensivity)
+void Camera::setSensivity(double sensivity)
 {
     _sensivity = sensivity;
 }
 
-void FreeFlyCamera::VectorsFromAngles()
+void Camera::VectorsFromAngles()
 {
     static const Vector3D up(0, 0, 1);
     double r_temp = cos(_phi*M_PI/180);
@@ -96,12 +92,12 @@ void FreeFlyCamera::VectorsFromAngles()
     _target = _position + _forward;
 }
 
-void FreeFlyCamera::look()
+void Camera::look()
 {
     gluLookAt(_position.X, _position.Y, _position.Z, _target.X, _target.Y, _target.Z, 0, 0, 1);
 }
 
-FreeFlyCamera::~FreeFlyCamera()
+Camera::~Camera()
 {
     SDL_WM_GrabInput(SDL_GRAB_ON);
     SDL_ShowCursor(SDL_DISABLE);

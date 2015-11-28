@@ -1,14 +1,18 @@
 #ifndef MOUSEHANDLER_H
 #define MOUSEHANDLER_H
 
-#include "../../camera/free_fly_camera/free_fly_camera.h"
+
+#include <SDL/SDL.h>
+
+#include "../../camera/camera/camera.h"
+
 
 class MouseHandler
 {
 public:
     MouseHandler();
 
-    void Handle(FreeFlyCamera*);
+    void Handle(Camera*);
 };
 
 #endif // MOUSEHANDLER_H

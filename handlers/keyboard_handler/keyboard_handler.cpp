@@ -1,12 +1,8 @@
-#include <SDL/SDL.h>
-#include <iostream>
-#include <cmath>
-
 #include "keyboard_handler.h"
 
 KeyboardHandler::KeyboardHandler() {}
 
-void KeyboardHandler::Handle(FreeFlyCamera* camera) {
+void KeyboardHandler::Handle(Camera* camera) {
     /*Uint8* keystate = SDL_GetKeyState(NULL);
 
     if(keystate[SDLK_UP]) {
