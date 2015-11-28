@@ -37,13 +37,17 @@ int main(int argc, char *argv[])
 
     Camera* free_fly_camera = new Camera(Vector3D(0,0,1));
 
-    Ground *ground = new Ground(100, 100);
+    Ground *ground = new Ground(1000, 1000);
     Cube *cube = new Cube();
     Pyramid *pyramid = new Pyramid();
 
     putenv("SDL_VIDEO_CENTERED=1");
     SDL_Init(SDL_INIT_VIDEO);
     SDL_WM_SetCaption("Wander Around", NULL);
+
+    // Anti-aliasing
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 6);
 
     window = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32, SDL_OPENGL);
 
@@ -53,7 +57,7 @@ int main(int argc, char *argv[])
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     // If zNear (the third argument) is too close from 0 (like 0.001), huge polygon bleeding can be seen.
-    gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
+    gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 10000);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 

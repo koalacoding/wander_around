@@ -51,8 +51,8 @@
 			<Add library="glu32" />
 			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/lib" />
 		</Linker>
-		<Unit filename="camera/free_fly_camera/free_fly_camera.cpp" />
-		<Unit filename="camera/free_fly_camera/free_fly_camera.h" />
+		<Unit filename="camera/camera/camera.cpp" />
+		<Unit filename="camera/camera/camera.h" />
 		<Unit filename="camera/vector3d/vector3d.cpp" />
 		<Unit filename="camera/vector3d/vector3d.h" />
 		<Unit filename="cb.bmp" />
