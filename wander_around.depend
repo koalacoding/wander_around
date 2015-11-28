@@ -1,0 +1,328 @@
+# depslib dependency file v1.0
+1448706859 source:f:\coding\cpp\wander_around_cb\main.cpp
+	<iostream>
+	"sdl_gl_utils/sdl_gl_utils.h"
+	"camera/free_fly_camera/free_fly_camera.h"
+	"elements/landscape/ground.h"
+	"elements/objects/cube/cube.h"
+	"elements/objects/pyramid/pyramid.h"
+	"handlers/keyboard_handler/keyboard_handler.h"
+	"handlers/mouse_handler/mouse_handler.h"
+
+1448702860 f:\coding\cpp\wander_around_cb\sdl_gl_utils\sdl_gl_utils.h
+	<GL/gl.h>
+	<SDL/SDL.h>
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\gl\gl.h
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_audio.h"
+	"SDL_cdrom.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_loadso.h"
+	"SDL_mutex.h"
+	"SDL_rwops.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_video.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<iconv.h>
+	"begin_code.h"
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	"close_code.h"
+
+1326110988 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_config.h
+	"SDL_platform.h"
+	"SDL_config_dreamcast.h"
+	"SDL_config_macos.h"
+	"SDL_config_macosx.h"
+	"SDL_config_symbian.h"
+	"SDL_config_win32.h"
+	"SDL_config_os2.h"
+	"SDL_config_minimal.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_platform.h
+
+1326110994 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_config_win32.h
+	"SDL_platform.h"
+
+1341006780 c:\program files (x86)\codeblocks\mingw\include\sys\types.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006770 c:\program files (x86)\codeblocks\mingw\include\_mingw.h
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdio.h
+	<_mingw.h>
+	<stddef.h>
+	<stdarg.h>
+	<sys/types.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdlib.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\malloc.h
+	<_mingw.h>
+	<stdlib.h>
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\memory.h
+	<string.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\string.h
+	<_mingw.h>
+	<stddef.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\strings.h
+	<string.h>
+
+1341006772 c:\program files (x86)\codeblocks\mingw\include\inttypes.h
+	<_mingw.h>
+	<stdint.h>
+	<stddef.h>
+
+1341006776 c:\program files (x86)\codeblocks\mingw\include\stdint.h
+	<stddef.h>
+
+1341006770 c:\program files (x86)\codeblocks\mingw\include\ctype.h
+	<_mingw.h>
+	<stddef.h>
+
+1326111000 c:\program files (x86)\codeblocks\mingw\include\sdl\begin_code.h
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\close_code.h
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	"close_code.h"
+
+1341006774 c:\program files (x86)\codeblocks\mingw\include\process.h
+	<_mingw.h>
+	<sys/types.h>
+	<stdint.h>
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_cdrom.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_active.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_quit.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_active.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keysym.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_keysym.h
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1325738640 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1448702860 f:\coding\cpp\wander_around_cb\camera\free_fly_camera\free_fly_camera.h
+	"../vector3d/vector3d.h"
+	<SDL/SDL.h>
+	<map>
+	<string>
+
+1448702860 f:\coding\cpp\wander_around_cb\camera\vector3d\vector3d.h
+
+1448702860 f:\coding\cpp\wander_around_cb\elements\landscape\ground.h
+	<GL/glu.h>
+
+1301111164 c:\program files (x86)\codeblocks\mingw\include\gl\glu.h
+	<stddef.h>
+	<GL/gl.h>
+
+1448702860 f:\coding\cpp\wander_around_cb\elements\objects\cube\cube.h
+	<cmath>
+	<GL/glu.h>
+
+1448702860 f:\coding\cpp\wander_around_cb\elements\objects\pyramid\pyramid.h
+	<GL/glu.h>
+
+1448703309 f:\coding\cpp\wander_around_cb\handlers\keyboard_handler\keyboard_handler.h
+	"../../camera/free_fly_camera/free_fly_camera.h"
+
+1448703314 f:\coding\cpp\wander_around_cb\handlers\mouse_handler\mouse_handler.h
+	"../../camera/free_fly_camera/free_fly_camera.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\camera\free_fly_camera\free_fly_camera.cpp
+	"free_fly_camera.h"
+	<iostream>
+	<cmath>
+	<GL/glu.h>
+
+1448702860 source:f:\coding\cpp\wander_around_cb\camera\vector3d\vector3d.cpp
+	"vector3d.h"
+	<cmath>
+
+1448702860 source:f:\coding\cpp\wander_around_cb\elements\landscape\ground.cpp
+	"ground.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\elements\objects\cube\cube.cpp
+	"cube.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\elements\objects\pyramid\pyramid.cpp
+	"pyramid.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\handlers\keyboard_handler\keyboard_handler.cpp
+	<SDL/SDL.h>
+	<iostream>
+	<cmath>
+	"keyboard_handler.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\handlers\mouse_handler\mouse_handler.cpp
+	<iostream>
+	<SDL/SDL.h>
+	"mouse_handler.h"
+
+1448702860 source:f:\coding\cpp\wander_around_cb\sdl_gl_utils\sdl_gl_utils.cpp
+	"sdl_gl_utils.h"
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<GL/glu.h>
+	<typeinfo>
+	<iostream>
+	<cstring>
+	<cstdlib>
+
+1325788834 c:\program files (x86)\codeblocks\mingw\include\sdl\sdl_image.h
+	"SDL.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+

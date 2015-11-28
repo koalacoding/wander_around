@@ -1,2 +1,7 @@
 wander_around.pro.user
 build*/
+bin/
+obj/
+*.dll
+cb.bmp
+*.layout

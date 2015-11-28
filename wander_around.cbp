@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="wander_around" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/wander_around_cb" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="glu32" />
+					<Add library="opengl32" />
+					<Add library="SDLmain" />
+					<Add library="SDL" />
+					<Add library="SDL_image" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/wander_around_cb" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/include" />
+		</Compiler>
+		<Linker>
+			<Add library="mingw32" />
+			<Add library="SDLmain" />
+			<Add library="SDL.dll" />
+			<Add library="user32" />
+			<Add library="gdi32" />
+			<Add library="winmm" />
+			<Add library="dxguid" />
+			<Add library="opengl32" />
+			<Add library="glu32" />
+			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/lib" />
+		</Linker>
+		<Unit filename="camera/free_fly_camera/free_fly_camera.cpp" />
+		<Unit filename="camera/free_fly_camera/free_fly_camera.h" />
+		<Unit filename="camera/vector3d/vector3d.cpp" />
+		<Unit filename="camera/vector3d/vector3d.h" />
+		<Unit filename="cb.bmp" />
+		<Unit filename="elements/landscape/ground.cpp" />
+		<Unit filename="elements/landscape/ground.h" />
+		<Unit filename="elements/objects/cube/cube.cpp" />
+		<Unit filename="elements/objects/cube/cube.h" />
+		<Unit filename="elements/objects/pyramid/pyramid.cpp" />
+		<Unit filename="elements/objects/pyramid/pyramid.h" />
+		<Unit filename="handlers/keyboard_handler/keyboard_handler.cpp" />
+		<Unit filename="handlers/keyboard_handler/keyboard_handler.h" />
+		<Unit filename="handlers/mouse_handler/mouse_handler.cpp" />
+		<Unit filename="handlers/mouse_handler/mouse_handler.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="sdl_gl_utils/sdl_gl_utils.cpp" />
+		<Unit filename="sdl_gl_utils/sdl_gl_utils.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

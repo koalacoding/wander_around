@@ -1,5 +1,6 @@
-#include "sdl_gl_utils/sdl_gl_utils.h"
+#include <iostream>
 
+#include "sdl_gl_utils/sdl_gl_utils.h"
 #include "camera/free_fly_camera/free_fly_camera.h"
 #include "elements/landscape/ground.h"
 #include "elements/objects/cube/cube.h"
@@ -46,20 +47,22 @@ int main(int argc, char *argv[])
     putenv("SDL_VIDEO_CENTERED=1");
     SDL_Init(SDL_INIT_VIDEO);
     SDL_WM_SetCaption("Wander Around", NULL);
+
     window = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32, SDL_OPENGL);
 
     SDL_WM_GrabInput(SDL_GRAB_ON);
+    SDL_ShowCursor(SDL_DISABLE);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.001, 1000);
+    // If zNear (the third argument) is too close from 0 (like 0.001), huge polygon bleeding can be seen.
+    gluPerspective(70, (double) WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    //LoadTextures(&texture1, texture2, texture4);
-    texture1 = loadTexture("../images/stainedglass05.jpg");
-    texture2 = loadTexture("../images/tiles_ctf05r.jpg");
-    texture4 = loadTexture("../images/grass.jpg");
+    texture1 = loadTexture("images/stainedglass05.jpg");
+    texture2 = loadTexture("images/tiles_ctf05r.jpg");
+    texture4 = loadTexture("images/grass.jpg");
 
     last_time = SDL_GetTicks();
 
